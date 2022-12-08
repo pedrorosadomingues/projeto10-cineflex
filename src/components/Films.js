@@ -9,7 +9,6 @@ export default function Films({setSelectedFilm}) {
     function selectFilm(film){
 
         setSelectedFilm(film)
-        console.log(film)
     }
     useEffect(() => {
         const URL = "https://mock-api.driven.com.br/api/v8/cineflex/movies"
@@ -20,7 +19,6 @@ export default function Films({setSelectedFilm}) {
 
     if(films===undefined) return <div>Carregando...</div>
 
-    console.log(films)
     return (
         <FilmsContainer>
             {films.map(film =>

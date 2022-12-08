@@ -88,8 +88,15 @@ input{
 }
 `
 const Button = styled.button`
- width: 40%;
+ width: 60%;
+  height: 42px;
  display: block;
- margin: 57px auto 0 auto;
+ margin: 57px auto 20px auto;
+
+ background-color: #E8833A;
+ color: white;
+ font-family: 'Roboto', sans-serif;
+ font-size: 18px;
+
 
 `

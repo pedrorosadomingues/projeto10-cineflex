@@ -8,6 +8,7 @@ import { useState } from "react";
 
 export default function App() {
   const [selectedFilm, setSelectedFilm] = useState({})
+ 
   return (
     <BrowserRouter>
       <Cineflex>
@@ -18,6 +19,7 @@ export default function App() {
           />} />
           <Route path="/sessions/:filmId" element={ <Sessions
           selectedFilm={selectedFilm}
+          setSelectedFilm={setSelectedFilm}
            /> }/>
           <Route path="/seats/:sessionId" element={<Seats 
           selectedFilm={selectedFilm}
