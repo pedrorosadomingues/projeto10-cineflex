@@ -28,6 +28,18 @@ export default function Seats() {
       <img src={available} alt="selected"/>
       <img src={unavailable} alt="selected"/>
       </Subtitle>
+      <Subtitle>
+      <p>Selecionado</p>
+      <p>Disponível</p>
+      <p>Indisponível</p>
+      </Subtitle>
+        <InputsContainer>
+      <p>Nome do comprador:</p>
+      <input type="text" placeholder="Digite seu nome..."/>
+      <p>CPF do compradro:</p>
+      <input type="text" placeholder="Digite seu CPF..."/>
+      </InputsContainer>
+      <Button>Reservar Assento(s)</Button>
     </>
       
   );
@@ -57,4 +69,23 @@ align-items: center;
 justify-content: space-evenly;
 
 margin-top: 20px;
+`
+
+const InputsContainer = styled.div`
+margin-top: 20px;
+width: 90%;
+
+input{
+  height: 51px;
+  width: 100%;
+  border-radius: 3px;
+  margin: 5px 0;
+  padding-left: 10px;
+}
+`
+const Button = styled.button`
+ width: 40%;
+ display: block;
+ margin: 57px auto 0 auto;
+
 `

@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
 import styled from 'styled-components'
+import { Link } from "react-router-dom"
 
 export default function Films() {
-    const [films, setFilms] = useState([])
-
-    function goToSessions(id) {
-    const URL = `https://mock-api.driven.com.br/api/v8/cineflex/movies/${id}/showtimes`
-    const promise = axios.get(URL)
-    promise.then(res => console.log(res.data.days))
-    promise.catch(err => console.log(err.response.data))
-    }
+    const [films, setFilms] = useState(undefined)
 
     useEffect(() => {
         const URL = "https://mock-api.driven.com.br/api/v8/cineflex/movies"
@@ -19,13 +13,17 @@ export default function Films() {
         promise.catch(err => console.log(err.response.data))
     }, [])
 
+    if(films===undefined) return <div>Carregando...</div>
 
+    console.log(films)
     return (
         <FilmsContainer>
             {films.map(film =>
-            (<Film key={film.id}>
-                <img onClick={()=> goToSessions(film.id)}src={film.posterURL} alt="Filme 1" />
-            </Film>)
+            (<Link key={film.id} to={`/sessions/${film.id}`}>
+                <Film >
+                    <img src={film.posterURL} alt="Filme 1" />
+                </Film>
+            </Link>)
             )}
         </FilmsContainer>
     )
