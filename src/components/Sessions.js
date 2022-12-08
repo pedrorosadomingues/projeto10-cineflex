@@ -2,8 +2,10 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Footer from './Footer';
 
-export default function Sessions() {
+export default function Sessions({selectedFilm}) {
   const { filmId } = useParams();
   const [sessions, setSessions] = useState(undefined)
 
@@ -20,9 +22,13 @@ export default function Sessions() {
     <div>
       {sessions.map((session) => <div key={session.id}>
         <Day >{session.weekday} - {session.date}</Day>
-        {session.showtimes.map((showtime) => <Time key={showtime.name}>{showtime.name}</Time>)}
+        {session.showtimes.map((showtime) =><Link key={showtime.name} to={`/seats/${showtime.id}`}
+        > 
+        <Time >{showtime.name}</Time>
+        </Link>)}
       </div>
       )}
+      <Footer selectedFilm={selectedFilm} />
     </div>
   );
 }

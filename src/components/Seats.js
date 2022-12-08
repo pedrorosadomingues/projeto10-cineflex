@@ -4,44 +4,48 @@ import styled from 'styled-components';
 import selected from '../assets/selected.svg'
 import available from '../assets/available.svg'
 import unavailable from '../assets/unavailable.svg'
+import { useParams } from 'react-router-dom';
+import Footer from './Footer';
 
-export default function Seats() {
-  const [seats, setSeats] = useState([])
+export default function Seats({ selectedFilm }) {
+  const { sessionId } = useParams();
+  const [seats, setSeats] = useState(undefined)
 
   useEffect(() => {
-    const URL = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/1/seats`
+    const URL = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${sessionId}/seats`
     const promise = axios.get(URL)
     promise.then(res => setSeats(res.data.seats))
   }, [])
   console.log(seats)
-
+  if (seats === undefined) return <div>Carregando...</div>
   return (
     <>
       <SeatsContainer>
-      {seats.map((seat) => <>
-        <Seat status={seat.isAvailable}>{seat.name}</Seat>
-      </>
-      )}
+        {seats.map((seat) => <div key={seat.name}>
+          <Seat status={seat.isAvailable}>{seat.name}</Seat>
+        </div>
+        )}
       </SeatsContainer>
       <Subtitle>
-      <img src={selected} alt="selected"/>
-      <img src={available} alt="selected"/>
-      <img src={unavailable} alt="selected"/>
+        <img src={selected} alt="selected" />
+        <img src={available} alt="selected" />
+        <img src={unavailable} alt="selected" />
       </Subtitle>
       <Subtitle>
-      <p>Selecionado</p>
-      <p>Disponível</p>
-      <p>Indisponível</p>
+        <p>Selecionado</p>
+        <p>Disponível</p>
+        <p>Indisponível</p>
       </Subtitle>
-        <InputsContainer>
-      <p>Nome do comprador:</p>
-      <input type="text" placeholder="Digite seu nome..."/>
-      <p>CPF do compradro:</p>
-      <input type="text" placeholder="Digite seu CPF..."/>
+      <InputsContainer>
+        <p>Nome do comprador:</p>
+        <input type="text" placeholder="Digite seu nome..." />
+        <p>CPF do compradro:</p>
+        <input type="text" placeholder="Digite seu CPF..." />
       </InputsContainer>
       <Button>Reservar Assento(s)</Button>
+      <Footer selectedFilm={selectedFilm} />
     </>
-      
+
   );
 }
 

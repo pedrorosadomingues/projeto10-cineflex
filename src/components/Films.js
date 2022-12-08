@@ -3,9 +3,14 @@ import axios from "axios"
 import styled from 'styled-components'
 import { Link } from "react-router-dom"
 
-export default function Films() {
+export default function Films({setSelectedFilm}) {
     const [films, setFilms] = useState(undefined)
 
+    function selectFilm(film){
+
+        setSelectedFilm(film)
+        console.log(film)
+    }
     useEffect(() => {
         const URL = "https://mock-api.driven.com.br/api/v8/cineflex/movies"
         const promise = axios.get(URL)
@@ -20,7 +25,7 @@ export default function Films() {
         <FilmsContainer>
             {films.map(film =>
             (<Link key={film.id} to={`/sessions/${film.id}`}>
-                <Film >
+                <Film onClick={()=>selectFilm(film)} >
                     <img src={film.posterURL} alt="Filme 1" />
                 </Film>
             </Link>)
