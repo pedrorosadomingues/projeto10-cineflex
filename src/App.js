@@ -9,7 +9,7 @@ import { useState } from "react";
 
 export default function App() {
   const [selectedFilm, setSelectedFilm] = useState({})
-  const [form, setForm] = useState({ids: [], name: "", cpf: ""});
+  const [form, setForm] = useState({ids: [], name: "", cpf: "" , seats: []});
  
   return (
     <BrowserRouter>
@@ -18,6 +18,7 @@ export default function App() {
         <Routes>
           <Route path="/" element= {<Films 
           setSelectedFilm={setSelectedFilm}
+          setForm={setForm}
           />} />
           <Route path="/sessions/:filmId" element={ <Sessions
           selectedFilm={selectedFilm}
@@ -30,7 +31,11 @@ export default function App() {
           form={form}
           setForm={setForm}
           /> } />
-          <Route path="/success" element={<Success form={form} />} />
+          <Route
+           path="/success" element={<Success 
+           form={form} 
+           selectedFilm={selectedFilm}
+           />} />
         </Routes>
       </Cineflex>
     </BrowserRouter>

@@ -16,22 +16,24 @@ export default function Seat({ seat, form, setForm }) {
     const [seatState, setSeat] = useState(seat)
 
     let arrayIds = form.ids
+    let arraySeats = form.seats
 
-    function selectSeat(isAvailable, id) {
-        if (!isAvailable) {
+    function selectSeat( seat) {
+        if (!seat.isAvailable) {
             alert('Esse assento não está disponível')
         }
-        if (isAvailable === true) {
-            arrayIds.push(id)
+        if (seat.isAvailable === true) {
+            arrayIds.push(seat.id)
+            arraySeats.push(seat.name)
             setSeat({ ...seatState, isAvailable: "selected" })
-            setForm({ ...form, ids: [...arrayIds] })
+            setForm({ ...form, ids: [...arrayIds], seats: [...arraySeats] })
         }
-        if (isAvailable === 'selected') {
+        if (seat.isAvailable === 'selected') {
             setSeat({ ...seatState, isAvailable: true })
         }
     }
     return (
-        <SeatStyled onClick={() => selectSeat(seatState.isAvailable, seat.id)} status={seatState.isAvailable}>{seat.name}</SeatStyled>
+        <SeatStyled onClick={() => selectSeat(seatState)} status={seatState.isAvailable}>{seat.name}</SeatStyled>
     )
 }
 

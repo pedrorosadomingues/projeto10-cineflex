@@ -3,27 +3,28 @@ import axios from "axios"
 import styled from 'styled-components'
 import { Link } from "react-router-dom"
 
-export default function Films({setSelectedFilm}) {
+
+export default function Films({ setSelectedFilm, setForm }) {
     const [films, setFilms] = useState(undefined)
 
-    function selectFilm(film){
-
+    function selectFilm(film) {
         setSelectedFilm(film)
     }
     useEffect(() => {
+        setForm({ ids: [], name: "", cpf: "", seats: [] });
         const URL = "https://mock-api.driven.com.br/api/v8/cineflex/movies"
         const promise = axios.get(URL)
         promise.then(res => setFilms(res.data))
         promise.catch(err => console.log(err.response.data))
     }, [])
 
-    if(films===undefined) return <div>Carregando...</div>
+    if (films === undefined) return <div>Carregando...</div>
 
     return (
         <FilmsContainer>
             {films.map(film =>
             (<Link key={film.id} to={`/sessions/${film.id}`}>
-                <Film onClick={()=>selectFilm(film)} >
+                <Film onClick={() => selectFilm(film)} >
                     <img src={film.posterURL} alt="Filme 1" />
                 </Film>
             </Link>)
