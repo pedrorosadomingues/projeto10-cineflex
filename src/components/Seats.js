@@ -5,11 +5,12 @@ import selected from '../assets/selected.svg'
 import available from '../assets/available.svg'
 import unavailable from '../assets/unavailable.svg'
 import { useParams } from 'react-router-dom';
+import Seat from './Seat';
 import Footer from './Footer';
 
 export default function Seats({ selectedFilm }) {
   const { sessionId } = useParams();
-  const [seats, setSeats] = useState(undefined)
+  const [seats, setSeats] = useState(undefined);
 
   useEffect(() => {
     const URL = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${sessionId}/seats`
@@ -22,7 +23,7 @@ export default function Seats({ selectedFilm }) {
     <>
       <SeatsContainer>
         {seats.map((seat) => <div key={seat.name}>
-          <Seat status={seat.isAvailable}>{seat.name}</Seat>
+          <Seat seat={seat} />
         </div>
         )}
       </SeatsContainer>
@@ -39,7 +40,7 @@ export default function Seats({ selectedFilm }) {
       <InputsContainer>
         <p>Nome do comprador:</p>
         <input type="text" placeholder="Digite seu nome..." />
-        <p>CPF do compradro:</p>
+        <p>CPF do comprador:</p>
         <input type="text" placeholder="Digite seu CPF..." />
       </InputsContainer>
       <Button>Reservar Assento(s)</Button>
@@ -56,16 +57,16 @@ flex-wrap: wrap;
 padding-left: 20px;
 `
 
-const Seat = styled.button`
-width: 26px;
-height: 26px;
-border-radius: 50%;
-margin-top: 19px;
-display: flex;
-justify-content: center;
-align-items: center;
-background-color: ${props => props.status ? "#C3CFD9" : "#FBE192"};
-`
+// const Seat = styled.button`
+// width: 26px;
+// height: 26px;
+// border-radius: 50%;
+// margin-top: 19px;
+// display: flex;
+// justify-content: center;
+// align-items: center;
+// background: ${props => seatColor(props.status)};
+// `
 
 const Subtitle = styled.div`
 display: flex;
