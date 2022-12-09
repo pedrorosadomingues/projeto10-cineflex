@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
+import loading from '../assets/loading.gif'
 
 export default function Sessions({selectedFilm, setSelectedFilm, setTextHeader}) {
   const { filmId } = useParams();
@@ -20,7 +21,7 @@ console.log(sessions)
     promise.catch(err => console.log(err.response.data))
   }, [])
  
- if(sessions===undefined) return <div>Carregando...</div>
+ if(sessions===undefined) return <img src={loading} alt="loading" />
 
   return (
     <div>
@@ -48,10 +49,12 @@ const Time = styled.button`
   height: 43px;
   border-radius: 3px;
   background-color: #E8833A;
-
+  border: none;
+  border-radius: 3px;
   color: #FFFFFF;
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
-  
   margin-left: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px;
   `

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 import styled from 'styled-components'
 import { Link } from "react-router-dom"
+import loading from "../assets/loading.gif"
 
 
 export default function Films({ setSelectedFilm, setForm, setTextHeader }) {
@@ -19,7 +20,7 @@ export default function Films({ setSelectedFilm, setForm, setTextHeader }) {
         promise.catch(err => console.log(err.response.data))
     }, [])
 
-    if (films === undefined) return <div>Carregando...</div>
+    if (films === undefined) return <img src={loading} alt="loading" />
 
     return (
         <FilmsContainer>

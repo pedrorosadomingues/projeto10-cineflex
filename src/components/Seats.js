@@ -7,6 +7,7 @@ import unavailable from '../assets/unavailable.svg'
 import { useNavigate, useParams } from 'react-router-dom';
 import Seat from './Seat';
 import Footer from './Footer';
+import loading from '../assets/loading.gif'
 
 export default function Seats({ selectedFilm, form, setForm, setTextHeader }) {
   const { sessionId } = useParams();
@@ -27,7 +28,7 @@ export default function Seats({ selectedFilm, form, setForm, setTextHeader }) {
     promise.then(res => setSeats(res.data.seats))
   }, [])
 
-  if (seats === undefined) return <div>Carregando...</div>
+  if (seats === undefined) return <img src={loading} alt="loading" />
 
   return (
     <>

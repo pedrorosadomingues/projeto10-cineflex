@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export default function Success({ form, selectedFilm, setTextHeader}) {
+export default function Success({ form, selectedFilm, setTextHeader }) {
     setTextHeader("Pedido feito com sucesso!")
     return (
         <SuccessText>
@@ -28,7 +28,8 @@ h1 {
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     color: #293845;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    margin-top: 30px;
 }
 h2 {
     font-size: 22px;
