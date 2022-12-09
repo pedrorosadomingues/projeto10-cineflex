@@ -2,7 +2,6 @@ import styled from "styled-components"
 import { useState } from "react"
 
 function seatColor(isAvailable) {
-   
     if (!isAvailable) {
         return "#FBE192"
     }
@@ -13,26 +12,26 @@ function seatColor(isAvailable) {
         return "#C3CFD9"
     }
 }
-export default function Seat({ seat }) {
+export default function Seat({ seat, form, setForm }) {
     const [seatState, setSeat] = useState(seat)
 
-    function selectSeat(isAvailable) {
-        console.log(isAvailable)
+    let arrayIds = form.ids
 
+    function selectSeat(isAvailable, id) {
         if (!isAvailable) {
             alert('Esse assento não está disponível')
-            return
         }
-        if (isAvailable===true) {     
+        if (isAvailable === true) {
+            arrayIds.push(id)
             setSeat({ ...seatState, isAvailable: "selected" })
+            setForm({ ...form, ids: [...arrayIds] })
         }
         if (isAvailable === 'selected') {
-            return setSeat({ ...seatState, isAvailable: true })
+            setSeat({ ...seatState, isAvailable: true })
         }
-        
     }
     return (
-        <SeatStyled onClick={() => selectSeat(seatState.isAvailable, seat.name)} status={seatState.isAvailable}>{seat.name}</SeatStyled>
+        <SeatStyled onClick={() => selectSeat(seatState.isAvailable, seat.id)} status={seatState.isAvailable}>{seat.name}</SeatStyled>
     )
 }
 

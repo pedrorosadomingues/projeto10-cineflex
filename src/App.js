@@ -3,11 +3,13 @@ import Films from "./components/Films";
 import styled from "styled-components";
 import Sessions from "./components/Sessions";
 import Seats from "./components/Seats";
+import Success from "./components/Success";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
 export default function App() {
   const [selectedFilm, setSelectedFilm] = useState({})
+  const [form, setForm] = useState({ids: [], name: "", cpf: ""});
  
   return (
     <BrowserRouter>
@@ -21,9 +23,14 @@ export default function App() {
           selectedFilm={selectedFilm}
           setSelectedFilm={setSelectedFilm}
            /> }/>
-          <Route path="/seats/:sessionId" element={<Seats 
+          <Route 
+          path="/seats/:sessionId" 
+          element={<Seats 
           selectedFilm={selectedFilm}
+          form={form}
+          setForm={setForm}
           /> } />
+          <Route path="/success" element={<Success form={form} />} />
         </Routes>
       </Cineflex>
     </BrowserRouter>

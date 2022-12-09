@@ -4,26 +4,41 @@ import styled from 'styled-components';
 import selected from '../assets/selected.svg'
 import available from '../assets/available.svg'
 import unavailable from '../assets/unavailable.svg'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Seat from './Seat';
 import Footer from './Footer';
 
-export default function Seats({ selectedFilm }) {
+
+export default function Seats({ selectedFilm, form, setForm }) {
   const { sessionId } = useParams();
   const [seats, setSeats] = useState(undefined);
+  const navigate = useNavigate();
 
+  function bookSeat(e) {
+    e.preventDefault();
+    const URL = `https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many`
+    const promise = axios.post(URL, form)
+    promise.then(res => navigate('/success'))
+  }
+
+  console.log(form)
   useEffect(() => {
     const URL = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${sessionId}/seats`
     const promise = axios.get(URL)
     promise.then(res => setSeats(res.data.seats))
   }, [])
-  console.log(seats)
+
   if (seats === undefined) return <div>Carregando...</div>
+
   return (
     <>
       <SeatsContainer>
         {seats.map((seat) => <div key={seat.name}>
-          <Seat seat={seat} />
+          <Seat
+            seat={seat}
+            form={form}
+            setForm={setForm}
+          />
         </div>
         )}
       </SeatsContainer>
@@ -37,13 +52,26 @@ export default function Seats({ selectedFilm }) {
         <p>Disponível</p>
         <p>Indisponível</p>
       </Subtitle>
-      <InputsContainer>
-        <p>Nome do comprador:</p>
-        <input type="text" placeholder="Digite seu nome..." />
-        <p>CPF do comprador:</p>
-        <input type="text" placeholder="Digite seu CPF..." />
-      </InputsContainer>
-      <Button>Reservar Assento(s)</Button>
+      <form onSubmit={bookSeat}>
+        <InputsContainer>
+          <label>Nome do comprador:</label>
+          <input
+            type="text"
+            placeholder="Digite seu nome..." v
+            alue={form.name}
+            onChange={e => setForm({ ...form, name: e.target.value })}
+            required
+          />
+          <label>CPF do comprador:</label>
+          <input type="text"
+            placeholder="Digite seu CPF..."
+            value={form.cpf}
+            onChange={e => setForm({ ...form, cpf: e.target.value })}
+            required
+          />
+        </InputsContainer>
+        <Button type="submit">Reservar Assento(s)</Button>
+      </form>
       <Footer selectedFilm={selectedFilm} />
     </>
 
@@ -56,17 +84,6 @@ gap: 7px;
 flex-wrap: wrap;
 padding-left: 20px;
 `
-
-// const Seat = styled.button`
-// width: 26px;
-// height: 26px;
-// border-radius: 50%;
-// margin-top: 19px;
-// display: flex;
-// justify-content: center;
-// align-items: center;
-// background: ${props => seatColor(props.status)};
-// `
 
 const Subtitle = styled.div`
 display: flex;
