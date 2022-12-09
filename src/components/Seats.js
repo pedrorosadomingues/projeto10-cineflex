@@ -8,8 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Seat from './Seat';
 import Footer from './Footer';
 
-
-export default function Seats({ selectedFilm, form, setForm }) {
+export default function Seats({ selectedFilm, form, setForm, setTextHeader }) {
   const { sessionId } = useParams();
   const [seats, setSeats] = useState(undefined);
   const navigate = useNavigate();
@@ -17,12 +16,12 @@ export default function Seats({ selectedFilm, form, setForm }) {
   function bookSeat(e) {
     e.preventDefault();
     const URL = `https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many`
-    const promise = axios.post(URL, {ids:form.ids , name: form.name, cpf: form.cpf})
+    const promise = axios.post(URL, { ids: form.ids, name: form.name, cpf: form.cpf })
     promise.then(res => navigate('/success'))
   }
 
-  console.log(form)
   useEffect(() => {
+    setTextHeader("Selecione o(s) assento(s)")
     const URL = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${sessionId}/seats`
     const promise = axios.get(URL)
     promise.then(res => setSeats(res.data.seats))
@@ -74,7 +73,6 @@ export default function Seats({ selectedFilm, form, setForm }) {
       </form>
       <Footer selectedFilm={selectedFilm} />
     </>
-
   );
 }
 
@@ -91,6 +89,13 @@ align-items: center;
 justify-content: space-evenly;
 
 margin-top: 20px;
+
+p {
+  font-size: 13px;
+  font-family: 'Roboto', sans-serif;
+  color: #4E5A65;
+
+}
 `
 
 const InputsContainer = styled.div`
@@ -104,13 +109,19 @@ input{
   margin: 5px 0;
   padding-left: 10px;
 }
+label {
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+  color: #293845;
+}
 `
 const Button = styled.button`
  width: 60%;
   height: 42px;
  display: block;
  margin: 57px auto 20px auto;
-
+ border: none;
+   border-radius: 3px;
  background-color: #E8833A;
  color: white;
  font-family: 'Roboto', sans-serif;

@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-export default function Header() {
+export default function Header({textHeader}) {
     return (
         <>
             <TopHeader>
                 <h1>CINEFLEX</h1>
             </TopHeader>
-            <BottomHeader>
-                <h2>Selecione o filme</h2>
+            <BottomHeader text={textHeader}>
+                <h2>{textHeader}</h2>
             </BottomHeader>
 
         </>
@@ -33,7 +33,7 @@ const BottomHeader = styled.div`
     justify-content: center;
     align-items: center;
     height: 110px;
-
+    color: ${props => props.text === "Pedido feito com sucesso!" ? "#1AAE9E" : "#293845" };
     font-family: 'Roboto', sans-serif;
     font-size: 24px;
     `

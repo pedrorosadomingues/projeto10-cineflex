@@ -12,6 +12,17 @@ function seatColor(isAvailable) {
         return "#C3CFD9"
     }
 }
+function seatBorderColor(isAvailable) {
+    if (!isAvailable) {
+        return "#F7C52B"
+    }
+    if (isAvailable === "selected") {
+        return "#0E7D71"
+    }
+    if (isAvailable) {
+        return "#808F9D"
+    }
+}
 export default function Seat({ seat, form, setForm }) {
     const [seatState, setSeat] = useState(seat)
 
@@ -46,4 +57,8 @@ display: flex;
 justify-content: center;
 align-items: center;
 background: ${props => seatColor(props.status)};
+border: 1px solid ${props => seatBorderColor(props.status)};
+transition: 1s;
+font-family: 'Roboto', sans-serif;
+font-size: 11px;
 `

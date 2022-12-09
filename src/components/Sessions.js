@@ -5,15 +5,15 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
 
-export default function Sessions({selectedFilm, setSelectedFilm}) {
+export default function Sessions({selectedFilm, setSelectedFilm, setTextHeader}) {
   const { filmId } = useParams();
   const [sessions, setSessions] = useState(undefined)
 console.log(sessions)
   function selectShowTime(showtime, session){
-      
       setSelectedFilm({...selectedFilm, showTime: session.weekday +' - ' +  showtime.name , session: session.date + " " + showtime.name })
   }
   useEffect(() => {
+    setTextHeader("Selecione o horário")
     const URL = `https://mock-api.driven.com.br/api/v8/cineflex/movies/${filmId}/showtimes`
     const promise = axios.get(URL)
     promise.then(res => setSessions(res.data.days))

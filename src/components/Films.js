@@ -4,13 +4,14 @@ import styled from 'styled-components'
 import { Link } from "react-router-dom"
 
 
-export default function Films({ setSelectedFilm, setForm }) {
+export default function Films({ setSelectedFilm, setForm, setTextHeader }) {
     const [films, setFilms] = useState(undefined)
 
     function selectFilm(film) {
-        setSelectedFilm(film)
+        setSelectedFilm(film) 
     }
     useEffect(() => {
+        setTextHeader("Selecione o filme")
         setForm({ ids: [], name: "", cpf: "", seats: [] });
         const URL = "https://mock-api.driven.com.br/api/v8/cineflex/movies"
         const promise = axios.get(URL)

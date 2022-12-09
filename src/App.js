@@ -10,19 +10,24 @@ import { useState } from "react";
 export default function App() {
   const [selectedFilm, setSelectedFilm] = useState({})
   const [form, setForm] = useState({ids: [], name: "", cpf: "" , seats: []});
+  const [textHeader, setTextHeader] = useState("Selecione o filme");
  
   return (
     <BrowserRouter>
       <Cineflex>
-        <Header />
+        <Header 
+        textHeader={textHeader}
+        />
         <Routes>
           <Route path="/" element= {<Films 
           setSelectedFilm={setSelectedFilm}
           setForm={setForm}
+          setTextHeader={setTextHeader}
           />} />
           <Route path="/sessions/:filmId" element={ <Sessions
           selectedFilm={selectedFilm}
           setSelectedFilm={setSelectedFilm}
+          setTextHeader={setTextHeader}
            /> }/>
           <Route 
           path="/seats/:sessionId" 
@@ -30,11 +35,13 @@ export default function App() {
           selectedFilm={selectedFilm}
           form={form}
           setForm={setForm}
+          setTextHeader={setTextHeader}
           /> } />
           <Route
            path="/success" element={<Success 
            form={form} 
            selectedFilm={selectedFilm}
+           setTextHeader={setTextHeader}
            />} />
         </Routes>
       </Cineflex>
