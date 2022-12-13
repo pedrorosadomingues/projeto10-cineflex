@@ -9,7 +9,7 @@ export default function Films({ setSelectedFilm, setForm, setTextHeader }) {
     const [films, setFilms] = useState(undefined)
 
     function selectFilm(film) {
-        setSelectedFilm(film) 
+        setSelectedFilm(film)
     }
     useEffect(() => {
         setTextHeader("Selecione o filme")
@@ -25,11 +25,14 @@ export default function Films({ setSelectedFilm, setForm, setTextHeader }) {
     return (
         <FilmsContainer>
             {films.map(film =>
-            (<Link data-test="movie" key={film.id} to={`/sessions/${film.id}`}>
-                <Film onClick={() => selectFilm(film)} >
-                    <img src={film.posterURL} alt="Filme 1" />
-                </Film>
-            </Link>)
+            (<div data-test="movie">
+                <Link key={film.id} to={`/sessions/${film.id}`}>
+                    <Film onClick={() => selectFilm(film)} >
+                        <img src={film.posterURL} alt="Filme 1" />
+                    </Film>
+                </Link>
+            </div>
+            )
             )}
         </FilmsContainer>
     )

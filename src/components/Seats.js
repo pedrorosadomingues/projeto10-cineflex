@@ -16,6 +16,7 @@ export default function Seats({ selectedFilm, form, setForm, setTextHeader }) {
 
   function bookSeat(e) {
     e.preventDefault();
+    if (form.ids.length === 0) return alert("Selecione pelo menos um assento")
     const URL = `https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many`
     const promise = axios.post(URL, { ids: form.ids, name: form.name, cpf: form.cpf })
     promise.then(res => navigate('/success'))
