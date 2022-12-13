@@ -44,7 +44,7 @@ export default function Seat({ seat, form, setForm }) {
         }
     }
     return (
-        <SeatStyled onClick={() => selectSeat(seatState)} status={seatState.isAvailable}>{seat.name}</SeatStyled>
+        <SeatStyled data-test="seat" onClick={() => selectSeat(seatState)} status={seatState.isAvailable}>{seat.name}</SeatStyled>
     )
 }
 

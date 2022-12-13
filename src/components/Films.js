@@ -25,7 +25,7 @@ export default function Films({ setSelectedFilm, setForm, setTextHeader }) {
     return (
         <FilmsContainer>
             {films.map(film =>
-            (<Link key={film.id} to={`/sessions/${film.id}`}>
+            (<Link data-test="movie" key={film.id} to={`/sessions/${film.id}`}>
                 <Film onClick={() => selectFilm(film)} >
                     <img src={film.posterURL} alt="Filme 1" />
                 </Film>

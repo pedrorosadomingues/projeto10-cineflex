@@ -25,9 +25,9 @@ console.log(sessions)
 
   return (
     <div>
-      {sessions.map((session) => <div key={session.id}>
+      {sessions.map((session) => <div data-test="movie-day"key={session.id}>
         <Day >{session.weekday} - {session.date}</Day>
-        {session.showtimes.map((showtime) =><Link key={showtime.name} to={`/seats/${showtime.id}`}
+        {session.showtimes.map((showtime) =><Link data-test="showtime" key={showtime.name} to={`/seats/${showtime.id}`}
         > 
         <Time onClick={()=>selectShowTime(showtime, session)}>{showtime.name}</Time>
         </Link>)}

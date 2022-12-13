@@ -61,6 +61,7 @@ export default function Seats({ selectedFilm, form, setForm, setTextHeader }) {
             alue={form.name}
             onChange={e => setForm({ ...form, name: e.target.value })}
             required
+            data-test="client-name"
           />
           <label>CPF do comprador:</label>
           <input type="text"
@@ -68,9 +69,10 @@ export default function Seats({ selectedFilm, form, setForm, setTextHeader }) {
             value={form.cpf}
             onChange={e => setForm({ ...form, cpf: e.target.value })}
             required
+            data-test="client-cpf"
           />
         </InputsContainer>
-        <Button type="submit">Reservar Assento(s)</Button>
+        <Button data-test="book-seat-btn" type="submit">Reservar Assento(s)</Button>
       </form>
       <Footer selectedFilm={selectedFilm} />
     </>

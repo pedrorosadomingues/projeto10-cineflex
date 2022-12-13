@@ -3,7 +3,7 @@ import styled from "styled-components"
 export default function Footer({ selectedFilm }) {
     return (
         <FooterContainer>
-            <FooterImage>
+            <FooterImage data-test="footer">
                 <img src={selectedFilm.posterURL} alt={selectedFilm.title} />
             </FooterImage>
             <FooterText>
